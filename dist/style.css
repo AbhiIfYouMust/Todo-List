@@ -1,0 +1,28 @@
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+#projects {
+    border: 2px solid green;
+    width: 20vw;
+    height: 100vh;
+
+} 
+
+#TODOs {
+    border: 2px solid red;
+    width: 80vw;
+    height: 100vh;
+}
+
+.project {
+    border: 2px solid maroon;
+    height: 30px;
+}
+
+.todo {
+    border: 2px solid maroon;
+    height: 30px;
+}

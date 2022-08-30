@@ -1,18 +1,41 @@
-import {todoGenerator, projectGenerator} from "./todoGenerator";
-import todoDOM from "./DOM";
+import {todoGenerator, projectGenerator} from "./objectGenerator";
+import {todoDOMGenerator, projectDOMGenerator} from "./DOM";
 
-const Projects = []
+// array to store all project(project is the file containing all TODOs)
+const Projects = [];
 
-let Todo1 = todoGenerator("any","something","02/02/2077","TOP");
+// const project1 = projectGenerator("Default");
+// const project2 = projectGenerator("Top priority");
+// const project3 = projectGenerator("Home applications");
 
-const domElement = todoDOM(Todo1);
+// const Todo1 = todoGenerator("home","things to do","22/03/2022","TOP");
+// const Todo2 = todoGenerator("class","things done","20/03/2022","MEDIUM");
+// const Todo3 = todoGenerator("room", "my room is mine", "12/12/2021","EASY");
 
-const body = document.querySelector("body");
+// project1.TodoList.push(Todo1);
+// project1.TodoList.push(Todo2);
+// project1.TodoList.push(Todo3);
 
-body.appendChild(domElement);
+// Projects.push(project1);
+// Projects.push(project2);
+// Projects.push(project3);
 
+const projectsDiv = document.querySelector("#projects");
+
+// Adds title of each project on DOM
 Projects.forEach(function(project) {
-    console.log(project.title);
-    let todoAll = project.TodoList;
-    todoAll.forEach(todo => console.log(todo));
+    let projectDOM = projectDOMGenerator(project);
+    projectsDiv.appendChild(projectDOM);
+})
+
+const TODODiv = document.querySelector("#TODOs");
+
+let selectedProject = Projects[0];
+
+let DisplayTODOs = selectedProject.TodoList;
+
+// Adds TODOs of selected project on DOM
+DisplayTODOs.forEach(function(TODO) {
+    let TODOdom = todoDOMGenerator(TODO); 
+    TODODiv.appendChild(TODOdom);
 })

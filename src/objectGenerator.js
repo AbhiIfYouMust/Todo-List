@@ -1,3 +1,4 @@
+// This module generates objects holding data
 function todoGenerator(title, description, dueDate, priority) {
     return {
         title: title,

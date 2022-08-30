@@ -16,7 +16,7 @@
   \********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst todoDiv = document.createElement('div');\ntodoDiv.classList.add = \"todo\";\n\nfunction todoDOM(todoObject) {\n    todoDiv.textContent = `${todoObject.title},  ${todoObject.description},   ${todoObject.dueDate},   ${todoObject.priority}`;\n    return todoDiv;\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (todoDOM);\n\n//# sourceURL=webpack://todo-list/./src/DOM.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"projectDOMGenerator\": () => (/* binding */ projectDOMGenerator),\n/* harmony export */   \"todoDOMGenerator\": () => (/* binding */ todoDOMGenerator)\n/* harmony export */ });\n// This module creates DOM element\nfunction projectDOMGenerator(projectObject) {\n    let projectDiv = document.createElement(\"div\");\n    projectDiv.classList.add(\"project\");\n\n    projectDiv.textContent = `${projectObject.title}`;\n    return projectDiv;\n}\n\nfunction todoDOMGenerator(todoObject) {\n    let todoDiv = document.createElement('div');\n    todoDiv.classList.add(\"todo\");\n\n    todoDiv.textContent = `${todoObject.title},  ${todoObject.description},   ${todoObject.dueDate},   ${todoObject.priority}`;\n    return todoDiv;\n}\n\n\n\n//# sourceURL=webpack://todo-list/./src/DOM.js?");
 
 /***/ }),
 
@@ -26,17 +26,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todoGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todoGenerator */ \"./src/todoGenerator.js\");\n/* harmony import */ var _DOM__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DOM */ \"./src/DOM.js\");\n\n\n\nconst Projects = []\n\nlet Todo1 = (0,_todoGenerator__WEBPACK_IMPORTED_MODULE_0__.todoGenerator)(\"any\",\"something\",\"02/02/2077\",\"TOP\");\n\nconst domElement = (0,_DOM__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(Todo1);\n\nconst body = document.querySelector(\"body\");\n\nbody.appendChild(domElement);\n\nProjects.forEach(function(project) {\n    console.log(project.title);\n    let todoAll = project.TodoList;\n    todoAll.forEach(todo => console.log(todo));\n})\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _objectGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./objectGenerator */ \"./src/objectGenerator.js\");\n/* harmony import */ var _DOM__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DOM */ \"./src/DOM.js\");\n\n\n\n// array to store all project(project is the file containing all TODOs)\nconst Projects = [];\n\n// const project1 = projectGenerator(\"Default\");\n// const project2 = projectGenerator(\"Top priority\");\n// const project3 = projectGenerator(\"Home applications\");\n\n// const Todo1 = todoGenerator(\"home\",\"things to do\",\"22/03/2022\",\"TOP\");\n// const Todo2 = todoGenerator(\"class\",\"things done\",\"20/03/2022\",\"MEDIUM\");\n// const Todo3 = todoGenerator(\"room\", \"my room is mine\", \"12/12/2021\",\"EASY\");\n\n// project1.TodoList.push(Todo1);\n// project1.TodoList.push(Todo2);\n// project1.TodoList.push(Todo3);\n\n// Projects.push(project1);\n// Projects.push(project2);\n// Projects.push(project3);\n\nconst projectsDiv = document.querySelector(\"#projects\");\n\n// Adds title of each project on DOM\nProjects.forEach(function(project) {\n    let projectDOM = (0,_DOM__WEBPACK_IMPORTED_MODULE_1__.projectDOMGenerator)(project);\n    projectsDiv.appendChild(projectDOM);\n})\n\nconst TODODiv = document.querySelector(\"#TODOs\");\n\nlet selectedProject = Projects[0];\n\nlet DisplayTODOs = selectedProject.TodoList;\n\n// Adds TODOs of selected project on DOM\nDisplayTODOs.forEach(function(TODO) {\n    let TODOdom = (0,_DOM__WEBPACK_IMPORTED_MODULE_1__.todoDOMGenerator)(TODO); \n    TODODiv.appendChild(TODOdom);\n})\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 
 /***/ }),
 
-/***/ "./src/todoGenerator.js":
-/*!******************************!*\
-  !*** ./src/todoGenerator.js ***!
-  \******************************/
+/***/ "./src/objectGenerator.js":
+/*!********************************!*\
+  !*** ./src/objectGenerator.js ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"projectGenerator\": () => (/* binding */ projectGenerator),\n/* harmony export */   \"todoGenerator\": () => (/* binding */ todoGenerator)\n/* harmony export */ });\nfunction todoGenerator(title, description, dueDate, priority) {\n    return {\n        title: title,\n        description: description,\n        dueDate: dueDate,\n        priority: priority\n    };\n};\n\nfunction projectGenerator(title) {\n    return {\n        title: title,\n        TodoList : []\n    };\n};\n\n\n\n//# sourceURL=webpack://todo-list/./src/todoGenerator.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"projectGenerator\": () => (/* binding */ projectGenerator),\n/* harmony export */   \"todoGenerator\": () => (/* binding */ todoGenerator)\n/* harmony export */ });\n// This module generates objects holding data\nfunction todoGenerator(title, description, dueDate, priority) {\n    return {\n        title: title,\n        description: description,\n        dueDate: dueDate,\n        priority: priority\n    };\n};\n\nfunction projectGenerator(title) {\n    return {\n        title: title,\n        TodoList : []\n    };\n};\n\n\n\n//# sourceURL=webpack://todo-list/./src/objectGenerator.js?");
 
 /***/ })
 
