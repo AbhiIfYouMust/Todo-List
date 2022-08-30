@@ -1,26 +1,18 @@
 import {todoGenerator, projectGenerator} from "./todoGenerator";
+import todoDOM from "./DOM";
 
 const Projects = []
 
-const Todo1 = todoGenerator("any","an important task","02/05/2022","Top priority");
-const Todo2 = todoGenerator("this","task difficult","02/05/2021","Low priority");
-const Todo3 = todoGenerator("top priority","task difficult","02/05/2021","TOP");
+let Todo1 = todoGenerator("any","something","02/02/2077","TOP");
 
+const domElement = todoDOM(Todo1);
 
-const defaults = projectGenerator("defaults");
+const body = document.querySelector("body");
 
-defaults.TodoList.push(Todo1);
-defaults.TodoList.push(Todo2);
-
-const priority = projectGenerator("priority");
-
-priority.TodoList.push(Todo3);
-
-Projects.push(defaults);
-Projects.push(priority);
+body.appendChild(domElement);
 
 Projects.forEach(function(project) {
     console.log(project.title);
-    let Todos = project.TodoList;
-    Todos.forEach(todo => console.log(todo));
+    let todoAll = project.TodoList;
+    todoAll.forEach(todo => console.log(todo));
 })

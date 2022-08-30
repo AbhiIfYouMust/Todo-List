@@ -10,13 +10,23 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/DOM.js":
+/*!********************!*\
+  !*** ./src/DOM.js ***!
+  \********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst todoDiv = document.createElement('div');\ntodoDiv.classList.add = \"todo\";\n\nfunction todoDOM(todoObject) {\n    todoDiv.textContent = `${todoObject.title},  ${todoObject.description},   ${todoObject.dueDate},   ${todoObject.priority}`;\n    return todoDiv;\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (todoDOM);\n\n//# sourceURL=webpack://todo-list/./src/DOM.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todoGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todoGenerator */ \"./src/todoGenerator.js\");\n\n\nconst Projects = []\n\nconst Todo1 = (0,_todoGenerator__WEBPACK_IMPORTED_MODULE_0__.todoGenerator)(\"any\",\"an important task\",\"02/05/2022\",\"Top priority\");\nconst Todo2 = (0,_todoGenerator__WEBPACK_IMPORTED_MODULE_0__.todoGenerator)(\"this\",\"task difficult\",\"02/05/2021\",\"Low priority\");\nconst Todo3 = (0,_todoGenerator__WEBPACK_IMPORTED_MODULE_0__.todoGenerator)(\"top priority\",\"task difficult\",\"02/05/2021\",\"TOP\");\n\n\nconst defaults = (0,_todoGenerator__WEBPACK_IMPORTED_MODULE_0__.projectGenerator)(\"defaults\");\n\ndefaults.TodoList.push(Todo1);\ndefaults.TodoList.push(Todo2);\n\nconst priority = (0,_todoGenerator__WEBPACK_IMPORTED_MODULE_0__.projectGenerator)(\"priority\");\n\npriority.TodoList.push(Todo3);\n\nProjects.push(defaults);\nProjects.push(priority);\n\nProjects.forEach(function(project) {\n    console.log(project.title);\n    let Todos = project.TodoList;\n    Todos.forEach(todo => console.log(todo));\n})\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todoGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todoGenerator */ \"./src/todoGenerator.js\");\n/* harmony import */ var _DOM__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DOM */ \"./src/DOM.js\");\n\n\n\nconst Projects = []\n\nlet Todo1 = (0,_todoGenerator__WEBPACK_IMPORTED_MODULE_0__.todoGenerator)(\"any\",\"something\",\"02/02/2077\",\"TOP\");\n\nconst domElement = (0,_DOM__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(Todo1);\n\nconst body = document.querySelector(\"body\");\n\nbody.appendChild(domElement);\n\nProjects.forEach(function(project) {\n    console.log(project.title);\n    let todoAll = project.TodoList;\n    todoAll.forEach(todo => console.log(todo));\n})\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 
 /***/ }),
 
