@@ -9,8 +9,36 @@
 </head>
 <body>
 
-    <div id="projects"></div>
-    <div id="TODOs"></div>
+    <div id="projects">
+        <form action="#" method="post" id="project">
+            <label for="title"></label>
+            <input type="text" id="title" required placeholder="title" name="project-title">
+
+            <button id="submit" type="submit">Add</button>
+        </form>
+    </div>
+
+    <div id="TODOs">
+        <form action="#" method="post" id="TODO">  
+            <label for="title"></label>
+            <input type="text" id="title" required placeholder="title" name="todo-title">
+    
+            <label for="description"></label>
+            <input type="text" id="description" required placeholder="description" name="todo-description">
+    
+            <label for="dueDate"></label>
+            <input type="date" id="dueDate" required placeholder="dueDate" name="todo-dueDate">
+    
+            <label for="priority"></label>
+            <select name="priority" id="priority">
+                <option value="High">High priority</option>
+                <option value="Medium" selected>Medium priority</option>
+                <option value="Low" selected>Low priority</option>
+            </select>
+    
+            <button id="submit" type="submit">Add</button>
+        </form>
+    </div>
     
     <script src="main.js"></script>
 </body>

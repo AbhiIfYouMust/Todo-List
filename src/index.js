@@ -4,6 +4,61 @@ import {todoDOMGenerator, projectDOMGenerator} from "./DOM";
 // array to store all project(project is the file containing all TODOs)
 const Projects = [];
 
+const projectsDiv = document.querySelector("#projects");
+
+// Default project file
+const project0 = projectGenerator("Default");
+Projects.push(project0);
+
+// Adding default to DOM
+let projectDOM0 = projectDOMGenerator(project0);
+projectsDiv.appendChild(projectDOM0);
+
+let selectedProject = Projects[0];
+
+// Triggers on hitting submit button on project div
+projectsDiv.addEventListener('submit', function(event) {
+	// Prevent default form submit
+	event.preventDefault();
+
+    // Collecting user entries from FORM inputs
+    let title = projectsDiv.querySelector('#title').value;
+
+    let project = projectGenerator(title);
+    Projects.push(project);
+
+    let projectDOM = projectDOMGenerator(project);
+    projectsDiv.appendChild(projectDOM);
+
+	// Clear the form fields
+	event.target.reset();
+});
+
+const TODODiv = document.querySelector("#TODOs");
+
+// Triggers on hitting submit button on todo div
+TODODiv.addEventListener('submit', function(event) {
+	// Prevent default form submit
+	event.preventDefault();
+
+    // Collecting user entries from FORM inputs          
+    let title = TODODiv.querySelector('#title').value;
+    let description = TODODiv.querySelector('#description').value;
+    let dueDate = TODODiv.querySelector('#dueDate').value;
+    let priority = TODODiv.querySelector('#priority').value;
+
+    let TODO = todoGenerator(title, description, dueDate, priority);
+
+    console.log(TODO);
+    selectedProject.TodoList.push(TODO);
+
+    let TODOdom = todoDOMGenerator(TODO);
+    TODODiv.appendChild(TODOdom);
+
+	// Clear the form fields
+	event.target.reset();
+});
+
 // const project1 = projectGenerator("Default");
 // const project2 = projectGenerator("Top priority");
 // const project3 = projectGenerator("Home applications");
@@ -20,22 +75,8 @@ const Projects = [];
 // Projects.push(project2);
 // Projects.push(project3);
 
-const projectsDiv = document.querySelector("#projects");
-
-// Adds title of each project on DOM
-Projects.forEach(function(project) {
-    let projectDOM = projectDOMGenerator(project);
-    projectsDiv.appendChild(projectDOM);
-})
-
-const TODODiv = document.querySelector("#TODOs");
-
-let selectedProject = Projects[0];
-
-let DisplayTODOs = selectedProject.TodoList;
-
-// Adds TODOs of selected project on DOM
-DisplayTODOs.forEach(function(TODO) {
-    let TODOdom = todoDOMGenerator(TODO); 
-    TODODiv.appendChild(TODOdom);
-})
+// // Adds title of each project on DOM
+// Projects.forEach(function(project) {
+//     let projectDOM = projectDOMGenerator(project);
+//     projectsDiv.appendChild(projectDOM);
+// })
