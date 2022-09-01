@@ -1,15 +1,18 @@
 import {todoGenerator, projectGenerator} from "./objectGenerator";
-import {todoDOMGenerator, projectDOMGenerator} from "./DOM";
+import { deleteProject } from "./delete";
+import {displayTODOs, displayProjects} from "./DisplayDOM";
 
 // array to store all project(project is the file containing all TODOs)
 const Projects = [];
 
-const projectsDiv = document.querySelector("#projects");
+// area of index.html where projects would be displayed
+const ProjectDisplay = document.querySelector("#project-display");
 
 // Default project file
 const project0 = projectGenerator("Default");
 Projects.push(project0);
 
+// Test objects
 const Todo1 = todoGenerator("home","things to do","22/03/2022","TOP");
 const Todo2 = todoGenerator("class","things done","20/03/2022","MEDIUM");
 const Todo3 = todoGenerator("room", "my room is mine", "12/12/2021","EASY");
@@ -18,55 +21,48 @@ project0.TodoList.push(Todo1);
 project0.TodoList.push(Todo2);
 project0.TodoList.push(Todo3);
 
-// Adding default to DOM
-let projectDOM0 = projectDOMGenerator(project0);
-projectsDiv.appendChild(projectDOM0);
-
+// For initialization
+displayProjects(Projects, ProjectDisplay);
 let selectedProject = Projects[0];
+let ToDisplayTODOs = selectedProject.TodoList;
 
+// area of index.html where TODOs would be displayed
 const TODODisplay = document.querySelector("#TODO-display");
 
-let DisplayTODOs = selectedProject.TodoList;
-
-DisplayTODOs.forEach(element => {
-    let TodoDom = todoDOMGenerator(element);
-    TODODisplay.appendChild(TodoDom);
-});
-
+displayTODOs(ToDisplayTODOs, TODODisplay);
 
 // Triggers on clicking on project div
 // Changes selectedProject and displays it's content
-projectsDiv.addEventListener('click', function(event){
+ProjectDisplay.addEventListener('click', function(event){
     if (event.target.className === 'project') {
         let requiredTitle = event.target.textContent;
         selectedProject = Projects.find(x => x.title === requiredTitle);
 
-        DisplayTODOs = selectedProject.TodoList;
+        ToDisplayTODOs = selectedProject.TodoList;
 
-        //Empties div before populating to avoid duplicates
-        TODODisplay.innerHTML = "";
+        displayTODOs(ToDisplayTODOs, TODODisplay);
 
-        // Displays TODOs
-        DisplayTODOs.forEach(element => {
-            let TodoDom = todoDOMGenerator(element);
-            TODODisplay.appendChild(TodoDom);
-        });
+    } else if (event.target.className === 'delete') {
+        deleteProject(selectedProject, Projects);
+
+        displayProjects(Projects, ProjectDisplay);
     };
-})
+});
+
+const projectQuery = document.querySelector("#project-query");
 
 // Triggers on hitting submit button on project div
-projectsDiv.addEventListener('submit', function(event) {
+projectQuery.addEventListener('submit', function(event) {
 	// Prevent default form submit
 	event.preventDefault();
 
     // Collecting user entries from FORM inputs
-    let title = projectsDiv.querySelector('#title').value;
+    let title = projectQuery.querySelector('#title').value;
 
     let project = projectGenerator(title);
     Projects.push(project);
 
-    let projectDOM = projectDOMGenerator(project);
-    projectsDiv.appendChild(projectDOM);
+    displayProjects(Projects, ProjectDisplay);
 
 	// Clear the form fields
 	event.target.reset();
@@ -89,8 +85,7 @@ TODOquery.addEventListener('submit', function(event) {
 
     selectedProject.TodoList.push(TODO);
 
-    let TODOdom = todoDOMGenerator(TODO);
-    TODODisplay.appendChild(TODOdom);
+    displayTODOs(selectedProject.TodoList, TODODisplay);
 
 	// Clear the form fields
 	event.target.reset();
@@ -117,3 +112,4 @@ TODOquery.addEventListener('submit', function(event) {
 //     let projectDOM = projectDOMGenerator(project);
 //     projectsDiv.appendChild(projectDOM);
 // })
+

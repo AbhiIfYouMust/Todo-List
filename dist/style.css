@@ -19,10 +19,24 @@ body {
 
 .project {
     border: 2px solid maroon;
-    height: 30px;
+    height: 80px;
 }
 
 .todo {
     border: 2px solid maroon;
-    height: 30px;
+    height: 80px;
+}
+
+.delete {
+    border: 2px solid red;
+    width: 5px;
+    height: 5px;
+    background-color: red;
+}
+
+.edit {
+    border: 2px solid grey;
+    width: 5px;
+    height: 5px;
+    background-color:grey;
 }
