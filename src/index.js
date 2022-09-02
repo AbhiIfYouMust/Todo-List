@@ -1,5 +1,5 @@
 import {todoGenerator, projectGenerator} from "./objectGenerator";
-import { deleteProject } from "./delete";
+import { deleteProject, deleteTodo } from "./delete";
 import {displayTODOs, displayProjects} from "./DisplayDOM";
 
 // array to store all project(project is the file containing all TODOs)
@@ -31,8 +31,8 @@ const TODODisplay = document.querySelector("#TODO-display");
 
 displayTODOs(ToDisplayTODOs, TODODisplay);
 
-// Triggers on clicking on project div
-// Changes selectedProject and displays it's content
+// Triggers on clicking on project div and it's components
+// Changes selectedProject and displays it's content or deletes a project or edits it
 ProjectDisplay.addEventListener('click', function(event){
     if (event.target.className === 'project') {
         let requiredTitle = event.target.textContent;
@@ -46,6 +46,15 @@ ProjectDisplay.addEventListener('click', function(event){
         deleteProject(selectedProject, Projects);
 
         displayProjects(Projects, ProjectDisplay);
+    };
+});
+
+//Triggers on clicking TODOdisplay components, deletes and edits it
+TODODisplay.addEventListener('click', function(event) {
+    if (event.target.className === "delete") {
+        deleteTodo(event.target.parentNode, selectedProject);
+
+        displayTODOs(ToDisplayTODOs, TODODisplay);
     };
 });
 
