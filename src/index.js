@@ -1,6 +1,7 @@
 import {todoGenerator, projectGenerator} from "./objectGenerator";
 import { deleteProject, deleteTodo } from "./delete";
 import {displayTODOs, displayProjects} from "./DisplayDOM";
+import { projectEditPopup } from "./popup";
 
 // array to store all project(project is the file containing all TODOs)
 const Projects = [];
@@ -43,9 +44,27 @@ ProjectDisplay.addEventListener('click', function(event){
         displayTODOs(ToDisplayTODOs, TODODisplay);
 
     } else if (event.target.className === 'delete') {
-        deleteProject(selectedProject, Projects);
+        // In case the currently selected project is to be deleted
+        if (selectedProject.TodoList === ToDisplayTODOs) {
+            deleteProject(selectedProject, Projects);
 
-        displayProjects(Projects, ProjectDisplay);
+            selectedProject = Projects[0];
+            ToDisplayTODOs = selectedProject.TodoList;
+
+            displayProjects(Projects, ProjectDisplay);
+            displayTODOs(ToDisplayTODOs, TODODisplay);
+
+        } else {
+            deleteProject(selectedProject, Projects);
+            displayProjects(Projects, ProjectDisplay);
+        };
+    } else if (event.target.className === 'edit') {
+
+        // Finding selected edit button's parent div and associated object
+        let requiredTitle = event.target.parentNode.textContent;
+        selectedProject = Projects.find(x => x.title === requiredTitle);
+ 
+        projectEditPopup(selectedProject, Projects, ProjectDisplay);
     };
 });
 

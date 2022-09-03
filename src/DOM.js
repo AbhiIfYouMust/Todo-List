@@ -1,8 +1,8 @@
 // This module creates DOM element
-let deleteDiv = document.createElement("div");
+let deleteDiv = document.createElement("button");
 deleteDiv.classList.add("delete");
 
-let editDiv = document.createElement("div");
+let editDiv = document.createElement("button");
 editDiv.classList.add("edit");
 
 function projectDOMGenerator(projectObject) {

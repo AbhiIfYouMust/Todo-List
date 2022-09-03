@@ -14,7 +14,6 @@
             <form action="#" method="post" id="project">
                 <label for="title"></label>
                 <input type="text" id="title" required placeholder="title" name="project-title">
-
                 <button id="submit" type="submit">Add</button>
             </form>
         </div>
@@ -40,12 +39,22 @@
                     <option value="Low" selected>Low priority</option>
                 </select>
         
-                <button id="submit" type="submit">Add</button>
+                <button id="submit" type="submit">&times;</button>
             </form>
         </div>
 
         <div id="TODO-display"></div>
     </div>
+
+    <dialog id="projectQueryModal">
+        <form action="#" method="post" id="project">
+            <label for="title"></label>
+            <input type="text" id="title" name="project-title">
+            <button id="submit" type="submit">Add</button>
+        </form>
+
+        <button id="closeProjectModal">Close</button>
+    </dialog>
     
     <script src="main.js"></script>
 </body>
