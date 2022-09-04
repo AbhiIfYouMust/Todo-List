@@ -64,9 +64,12 @@ ProjectDisplay.addEventListener('click', function(event){
         let requiredTitle = event.target.parentNode.textContent;
         selectedProject = Projects.find(x => x.title === requiredTitle);
  
-        projectEditPopup(selectedProject, Projects, ProjectDisplay);
+        projectEditPopup(selectedProject);
+
+        displayProjects(Projects, ProjectDisplay);
     };
 });
+
 
 //Triggers on clicking TODOdisplay components, deletes and edits it
 TODODisplay.addEventListener('click', function(event) {
