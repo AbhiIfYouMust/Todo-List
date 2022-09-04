@@ -1,7 +1,7 @@
 import {todoGenerator, projectGenerator} from "./objectGenerator";
 import { deleteProject, deleteTodo } from "./delete";
 import {displayTODOs, displayProjects} from "./DisplayDOM";
-import { projectEditPopup } from "./popup";
+import { projectEditPopup, todoEditPopup } from "./popup";
 
 // array to store all project(project is the file containing all TODOs)
 const Projects = [];
@@ -70,13 +70,21 @@ ProjectDisplay.addEventListener('click', function(event){
     };
 });
 
-
 //Triggers on clicking TODOdisplay components, deletes and edits it
 TODODisplay.addEventListener('click', function(event) {
     if (event.target.className === "delete") {
         deleteTodo(event.target.parentNode, selectedProject);
-
         displayTODOs(ToDisplayTODOs, TODODisplay);
+
+    } else if (event.target.className === "edit") {
+
+        // Splits text content of Todo div on "," and stores the 0th index item, the title
+        const requiredTitle = event.target.parentNode.textContent.split(',')[0];
+
+        // Finds object of associated with the requiredTitle
+        const requiredTodoObject = selectedProject.TodoList.find(x => x.title === requiredTitle);
+
+        todoEditPopup(requiredTodoObject);
     };
 });
 
@@ -90,8 +98,13 @@ projectQuery.addEventListener('submit', function(event) {
     // Collecting user entries from FORM inputs
     let title = projectQuery.querySelector('#title').value;
 
-    let project = projectGenerator(title);
-    Projects.push(project);
+    // Preventing duplicates
+    if (!(Projects.some((project) => title === project.title))) {
+        let project = projectGenerator(title);
+        Projects.push(project);
+    } else {
+        alert(`You already have a project with named ${title}.`);
+    };
 
     displayProjects(Projects, ProjectDisplay);
 
@@ -112,9 +125,14 @@ TODOquery.addEventListener('submit', function(event) {
     let dueDate = TODOquery.querySelector('#dueDate').value;
     let priority = TODOquery.querySelector('#priority').value;
 
-    let TODO = todoGenerator(title, description, dueDate, priority);
-
-    selectedProject.TodoList.push(TODO);
+    // Preventing duplicate titles
+    if (!(selectedProject.TodoList.some((Todo) => title === Todo.title))) {
+        let TODO = todoGenerator(title, description, dueDate, priority);
+        selectedProject.TodoList.push(TODO);
+        
+    } else {
+        alert(`You already have a Todo titled ${title}.`);
+    };
 
     displayTODOs(selectedProject.TodoList, TODODisplay);
 
