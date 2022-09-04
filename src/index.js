@@ -59,14 +59,11 @@ ProjectDisplay.addEventListener('click', function(event){
             displayProjects(Projects, ProjectDisplay);
         };
     } else if (event.target.className === 'edit') {
-
         // Finding selected edit button's parent div and associated object
         let requiredTitle = event.target.parentNode.textContent;
         selectedProject = Projects.find(x => x.title === requiredTitle);
  
-        projectEditPopup(selectedProject);
-
-        displayProjects(Projects, ProjectDisplay);
+        projectEditPopup(selectedProject, Projects, ProjectDisplay);
     };
 });
 
