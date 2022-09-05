@@ -62,7 +62,7 @@ ProjectDisplay.addEventListener('click', function(event){
         // Finding selected edit button's parent div and associated object
         let requiredTitle = event.target.parentNode.textContent;
         selectedProject = Projects.find(x => x.title === requiredTitle);
- 
+    
         projectEditPopup(selectedProject, Projects, ProjectDisplay);
     };
 });
