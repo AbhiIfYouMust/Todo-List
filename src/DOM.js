@@ -27,7 +27,19 @@ function todoDOMGenerator(todoObject) {
     let paragraph = document.createElement("p");
     todoDiv.appendChild(paragraph);
 
-    paragraph.textContent = `${todoObject.title},  ${todoObject.description},   ${todoObject.dueDate},   ${todoObject.priority}`;
+    // Changes from DD-MM-YYYY if date in YYYY/MM/DD
+    function ChangeDateFormat (date) {
+        if (date.includes("/")) {
+            const dateArray = date.split('/');
+            [dateArray[0], dateArray[2]] = [dateArray[2], dateArray[0]];
+            return dateArray.join('-');
+        }
+        else {
+            return date;
+        };  
+    };
+
+    paragraph.textContent = `${todoObject.title},  ${todoObject.description},   ${ChangeDateFormat(todoObject.dueDate)},   ${todoObject.priority}`;
 
     todoDiv.appendChild(deleteDiv.cloneNode(true));
     todoDiv.appendChild(editDiv.cloneNode(true));

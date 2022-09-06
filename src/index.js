@@ -14,9 +14,9 @@ const project0 = projectGenerator("Default");
 Projects.push(project0);
 
 // Test objects
-const Todo1 = todoGenerator("home","things to do","22/03/2022","TOP");
-const Todo2 = todoGenerator("class","things done","20/03/2022","MEDIUM");
-const Todo3 = todoGenerator("room", "my room is mine", "12/12/2021","EASY");
+const Todo1 = todoGenerator("home","things to do","22/03/2022","High");
+const Todo2 = todoGenerator("class","things done","20/03/2022","Medium");
+const Todo3 = todoGenerator("room", "my room is mine", "12/12/2021","Low");
 
 project0.TodoList.push(Todo1);
 project0.TodoList.push(Todo2);
@@ -74,14 +74,13 @@ TODODisplay.addEventListener('click', function(event) {
         displayTODOs(ToDisplayTODOs, TODODisplay);
 
     } else if (event.target.className === "edit") {
-
         // Splits text content of Todo div on "," and stores the 0th index item, the title
         const requiredTitle = event.target.parentNode.textContent.split(',')[0];
 
         // Finds object of associated with the requiredTitle
         const requiredTodoObject = selectedProject.TodoList.find(x => x.title === requiredTitle);
 
-        todoEditPopup(requiredTodoObject);
+        todoEditPopup(requiredTodoObject, ToDisplayTODOs, TODODisplay);
     };
 });
 
