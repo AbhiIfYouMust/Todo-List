@@ -2,6 +2,7 @@ import {todoGenerator, projectGenerator} from "./objectGenerator";
 import { deleteProject, deleteTodo } from "./delete";
 import {displayTODOs, displayProjects} from "./DisplayDOM";
 import { projectEditPopup, todoEditPopup } from "./popup";
+import "./styles.css";
 
 // array to store all project(project is the file containing all TODOs)
 const Projects = [];
